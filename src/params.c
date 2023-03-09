@@ -1,5 +1,4 @@
-#include "../include/fractol.h"
-
+#include "../fractol.h"
 void	mandelbrot_param(t_fractal *fractal, char *name)
 {
 	
@@ -31,7 +30,7 @@ void	julia_param(t_fractal *fractal, char *name)
 	fractal->color = 0xccf1ff;
 	fractal->name = name;
 }
-
+/*
 void	burning_param(t_fractal *fractal, char *name)
 {
 	fractal->width = 1280;
@@ -44,4 +43,4 @@ void	burning_param(t_fractal *fractal, char *name)
 	fractal->yarrow = 4530.0;
 	fractal->color = 0xccf1ff;
 	fractal->name = name;
-}
+}*/

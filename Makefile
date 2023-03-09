@@ -9,11 +9,11 @@ LIBFT = ./libft/libft.a
 SRC = src/fractol.c \
 	src/hook.c \
 	src/params.c \
-	#julia.c \
-	complex_math.c \
-	mandelbrot.c \
-	params.c \
-	burning.c \
+	src/julia.c \
+	src/mandelbrot.c \
+	src/complex_math.c \
+	src/params.c \
+	#burning.c \
 
 
 all: $(NAME)

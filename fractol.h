@@ -1,7 +1,7 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include "../libft/libft.h"
+# include "./libft/libft.h"
 #include <mlx.h>
 # include <math.h>
 # include <stdio.h>
@@ -56,12 +56,35 @@ typedef struct s_fractal {
 }				t_fractal;
 
 //functions
+//main
 void	miniburning(int x, int y, t_fractal *burning);
+void	fractalsetup(t_fractal *fractal);
+void    wrong_input();
+int		freeall(t_fractal *fractal);
 
+
+//hook
 void	ft_zoom(double x, double y, t_fractal *fractal);
 void	ft_dezoom(double x, double y, t_fractal *fractal);
 int     key_hook(int keycode, t_fractal *fractal);
 int     mouse_hook(int key_code, int x, int y, t_fractal *fractal);
-int	close_game(t_fractal *fractal);
+int		close_game(t_fractal *fractal);
 
+//julia
+void	juliaset(t_fractal *julia);
+
+//mandelbrot
+void	minimandel(int x, int y, t_fractal *mandel);
+void	mandelbrotset(t_fractal *mandel);
+
+//complex
+t_complex	add(t_complex a, t_complex b);
+t_complex	mappoint(t_fractal *fractal, double x, double y);
+t_complex	sqr(t_complex a);
+int			my_mlx_pixel_put(t_fractal *fractal, int x, int y, int color);
+
+//params
+void	mandelbrot_param(t_fractal *fractal, char *name);
+void	julia_param(t_fractal *fractal, char *name);
+//void	burning_param(t_fractal *fractal, char *name);
 #endif

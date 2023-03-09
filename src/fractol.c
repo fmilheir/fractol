@@ -1,4 +1,5 @@
-#include "../include/fractol.h"
+
+#include "../fractol.h"
 
 void    wrong_input()
 {
@@ -8,8 +9,25 @@ void    wrong_input()
     exit(1);
 }
 
+void	fractalsetup(t_fractal *fractal)
+{
+	mlx_destroy_image(fractal->mlx, fractal->img);
+	fractal->img = mlx_new_image(fractal->mlx, fractal->width, fractal->height);
+	fractal->addr = mlx_get_data_addr(fractal->img, &fractal->bits_per_pixel,
+			&fractal->line_length, &fractal->endian);
+	if (!ft_strncmp(fractal->name, "julia", 5))
+		juliaset(fractal);
+	else if (!ft_strncmp(fractal->name, "mandelbrot", 10))
+		mandelbrotset(fractal);
+	else if (!ft_strncmp(fractal->name, "burning", 7))
+		printf("place new fractal");
+		//burningset(fractal);
+	mlx_put_image_to_window(fractal->mlx, fractal->win, fractal->img, 0, 0);
+}
+
+
 //I have to ke of this and put it in the correct place
-void	miniburning(int x, int y, t_fractal *burning)
+/*void	miniburning(int x, int y, t_fractal *burning)
 {
 	int		i;
 	double	z0;
@@ -34,9 +52,17 @@ void	miniburning(int x, int y, t_fractal *burning)
 			break ;
 		}
 	}
+}*/
+
+//free memory from the linked list; 
+int	freeall(t_fractal *fractal)
+{
+	mlx_destroy_image(fractal->mlx, fractal->img);
+	mlx_destroy_window(fractal->mlx, fractal->win);
+	mlx_destroy_display(fractal->mlx);
+	free(fractal->mlx);
+	exit(0);
 }
-
-
 
 
 int main(int argc, char **argv)
@@ -48,19 +74,12 @@ int main(int argc, char **argv)
     if (argc == 2)
     {
         if (!ft_strcmp(argv[1], "mandelbrot"))
-        {
-            printf("this works just fine");
-        }
+			mandelbrot_param(&fractal, argv[1]);
         else if(!ft_strcmp(argv[1], "julia"))
-        {
-            printf("work as well for julia");
-        }
+			julia_param(&fractal, argv[1]);
         else if(!ft_strcmp(argv[1], "burning"))
-        {
             printf("work as well for burning");
-            burning_param(&fractal, argv[1]);
-        }
-       fractal.mlx = mlx_init();
+		fractal.mlx = mlx_init();
 		fractal.win = mlx_new_window(fractal.mlx, fractal.width,
 				fractal.height, fractal.name);
 		fractal.img = mlx_new_image(fractal.mlx, fractal.width, fractal.height);
