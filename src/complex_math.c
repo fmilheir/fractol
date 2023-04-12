@@ -1,7 +1,8 @@
 #include "../fractol.h"
 
 //this function is used in order to set the color of a pixel
-//getting the addres of the beguining of the image(addr) go fowward in memory in order to find the pixel to modify
+//getting the addres of the beguining of the image(addr) go fowward in memory 
+//in order to find the pixel to modify
 //divide by 8 in order to get the byte 
 int	my_mlx_pixel_put(t_fractal *fractal, int x, int y, int color)
 {
@@ -22,6 +23,7 @@ t_complex	add(t_complex a, t_complex b)
 	c.y = a.y + b.y;
 	return (c);
 }
+
 //make squareroot of a complex number
 t_complex	sqr(t_complex a)
 {
@@ -34,7 +36,6 @@ t_complex	sqr(t_complex a)
 
 //l is the scaling factor
 //l is the result of the multiplication of the height or width(the biggest one)
-//
 t_complex	mappoint(t_fractal *fractal, double x, double y)
 {
 	t_complex	c;
@@ -47,7 +48,6 @@ t_complex	mappoint(t_fractal *fractal, double x, double y)
 	x += fractal->xarrow ;
 	y += fractal->yarrow ;
 	c.x = 2 * fractal->radius * (x - fractal->width / 2) / l;
-	//imaginary
 	c.y = 2 * fractal->radius * (y - fractal->height / 2) / l;
 	return (c);
 }

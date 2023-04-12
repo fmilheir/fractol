@@ -65,8 +65,6 @@ int	mouse_hook(int key_code, int x, int y, t_fractal *fractal)
 	return (0);
 }
 
-
-
 // this is to close the game
 int	close_game(t_fractal *fractal)
 {

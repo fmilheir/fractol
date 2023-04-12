@@ -57,7 +57,6 @@ typedef struct s_fractal {
 
 //functions
 //main
-void	miniburning(int x, int y, t_fractal *burning);
 void	fractalsetup(t_fractal *fractal);
 void    wrong_input();
 int		freeall(t_fractal *fractal);
@@ -77,6 +76,10 @@ void	juliaset(t_fractal *julia);
 void	minimandel(int x, int y, t_fractal *mandel);
 void	mandelbrotset(t_fractal *mandel);
 
+//tricorn
+void	minitricorn(int x, int y, t_fractal *tricorn);
+void	tricorn(t_fractal *tricorn);
+
 //complex
 t_complex	add(t_complex a, t_complex b);
 t_complex	mappoint(t_fractal *fractal, double x, double y);
@@ -86,5 +89,6 @@ int			my_mlx_pixel_put(t_fractal *fractal, int x, int y, int color);
 //params
 void	mandelbrot_param(t_fractal *fractal, char *name);
 void	julia_param(t_fractal *fractal, char *name);
-//void	burning_param(t_fractal *fractal, char *name);
+void	tricorn_param(t_fractal *fractal, char *name);
+
 #endif

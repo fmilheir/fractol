@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fvieira <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/11/28 17:05:55 by fvieira           #+#    #+#              #
+#    Updated: 2023/01/23 14:34:39 by fvieira          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = fractol
 
 CC = cc
@@ -7,18 +19,17 @@ MLXFLAGS = -L ./minilibx-linux -lmlx -Ilmlx -lXext -lX11
 LIBFT = ./libft/libft.a
 
 SRC = src/fractol.c \
-	src/hook.c \
-	src/params.c \
 	src/julia.c \
-	src/mandelbrot.c \
 	src/complex_math.c \
+	src/hook.c \
+	src/mandelbrot.c \
 	src/params.c \
-	#burning.c \
+	src/tricorn.c\
 
 
 all: $(NAME)
 
-$(NAME): $(/src SRC:.c=.o)
+$(NAME): $(SRC:.c=.o)
 	$(MAKE) --no-print-directory -C ./libft
 	echo "\033[1m LIBFT done \033[0m"
 	$(MAKE) --no-print-directory -C ./minilibx-linux
