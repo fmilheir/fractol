@@ -3,52 +3,98 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fvieira <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: pbie <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/28 17:05:55 by fvieira           #+#    #+#              #
-#    Updated: 2023/01/23 14:34:39 by fvieira          ###   ########.fr        #
+#    Created: 2015/11/30 18:33:46 by pbie              #+#    #+#              #
+#    Updated: 2015/12/03 14:41:03 by pbie             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fractol
+FLAG = -Wall -Wextra -Werror
 
-CC = cc
+NAME = libft.a
 
-CFLAGS = -Wall -Werror -Wextra -g 
-MLXFLAGS = -L ./minilibx-linux -lmlx -Ilmlx -lXext -lX11
-LIBFT = ./libft/libft.a
+SRC = ft_atoi.c \
+	  ft_bzero.c \
+	  ft_isalnum.c \
+	  ft_isalpha.c \
+	  ft_isascii.c \
+	  ft_isdigit.c \
+	  ft_isprint.c \
+	  ft_itoa.c \
+	  ft_memalloc.c \
+	  ft_memccpy.c \
+	  ft_memchr.c \
+	  ft_memcmp.c \
+	  ft_memcpy.c \
+	  ft_memdel.c \
+	  ft_memmove.c \
+	  ft_memset.c \
+	  ft_putchar.c \
+	  ft_putchar_fd.c \
+	  ft_putendl.c \
+	  ft_putendl_fd.c \
+	  ft_putnbr.c \
+	  ft_putnbr_fd.c \
+	  ft_putstr.c \
+	  ft_putstr_fd.c \
+	  ft_strcat.c \
+	  ft_strchr.c \
+	  ft_strclr.c \
+	  ft_strcmp.c \
+	  ft_strcpy.c \
+	  ft_strdel.c \
+	  ft_strdup.c \
+	  ft_strequ.c \
+	  ft_striter.c \
+	  ft_striteri.c \
+	  ft_strjoin.c \
+	  ft_strlcat.c \
+	  ft_strlen.c \
+	  ft_strmap.c \
+	  ft_strmapi.c \
+	  ft_strncat.c \
+	  ft_strncmp.c \
+	  ft_strncpy.c \
+	  ft_strnequ.c \
+	  ft_strnew.c \
+	  ft_strnstr.c \
+	  ft_strrchr.c \
+	  ft_strsplit.c \
+	  ft_strstr.c \
+	  ft_strsub.c \
+	  ft_strtrim.c \
+	  ft_tolower.c \
+	  ft_toupper.c \
+	  ft_lstadd.c \
+	  ft_lstdel.c \
+	  ft_lstdelone.c \
+	  ft_lstiter.c \
+	  ft_lstnew.c \
+	  ft_lstmap.c \
 
-SRC = src/fractol.c \
-	src/julia.c \
-	src/complex_math.c \
-	src/hook.c \
-	src/mandelbrot.c \
-	src/params.c \
-	src/tricorn.c\
 
+OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(SRC:.c=.o)
-	$(MAKE) --no-print-directory -C ./libft
-	echo "\033[1m LIBFT done \033[0m"
-	$(MAKE) --no-print-directory -C ./minilibx-linux
-	echo "\033[1m MiniLibX done \033[0m"
-	$(CC) $(CFLAGS) -lm $(SRC) $(LIBFT) $(MLXFLAGS) -o $(NAME)
-	echo "\033[1m Ready to FRACT-OL \033[0m"
+$(NAME): $(OBJ)
+	@ar rc $(NAME) $(OBJ)
+	@echo "$(NAME) created"
+	@ranlib $(NAME)
+	@echo "$(NAME) indexed"
+
+%.o: %.c
+	@gcc $(FLAG) -c $< -o $@
 
 clean:
-	$(MAKE) clean -C ./libft
-	rm -rf $(SRC:.c=.o)
-	echo "OBJ deleted"
+	@rm -f $(OBJ)
+	@echo "OBJ deleted"
 
 fclean: clean
-	$(MAKE) fclean -C ./libft
-	rm -rf $(NAME)
-	echo "$(NAME) deleted"
+	@rm -f $(NAME)
+	@echo "$(NAME) deleted"
 
 re: fclean all
 
-.PHONY: all, clean, fclean, re, bonus
-
-.SILENT:
+.PHONY: all, clean, fclean, re
